@@ -31,7 +31,7 @@ for (var i = 1; i <= 9; i++) {
         .then((stream) => {
           startButton.disabled = true;
           preferredDisplaySurface.disabled = true;
-          const video = document.querySelector('video'+i);
+          const video = document.getElementById("gum-local"+i);
           video.srcObject = stream;
         
           // demonstrates how to detect that the user has stopped
