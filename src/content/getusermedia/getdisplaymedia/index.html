@@ -20,7 +20,7 @@
 
   <base target="_blank">
 
-  <title>getDisplayMedia</title>
+  <title>Multiple media streams</title>
 
   <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
   <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
@@ -31,9 +31,7 @@
 <body>
 
   <div id="container">
-    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getDisplayMedia</span></h1>
-
-    <video id="gum-local" autoplay playsinline muted></video>
+    <video id="gum-local1" autoplay playsinline muted></video>
     <button id="startButton" disabled>Start</button>
     <fieldset id="options" style="display:none">
       <legend>Advanced options</legend>
@@ -45,10 +43,6 @@
       </select>
     </fieldset>
     <div id="errorMsg"></div>
-
-    <p>Display the screensharing stream from <code>getDisplayMedia()</code> in a video element.</p>
-
-    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
   </div>
 
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
