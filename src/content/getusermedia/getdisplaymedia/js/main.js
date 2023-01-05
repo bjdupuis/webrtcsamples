@@ -20,46 +20,44 @@ if (adapter.browserDetails.browser === 'chrome' &&
   adapter.browserShim.shimGetDisplayMedia(window, 'screen');
 }
 
-function handleSuccess(stream) {
-  startButton.disabled = true;
-  preferredDisplaySurface.disabled = true;
-  const video = document.querySelector('video');
-  video.srcObject = stream;
+for (var i = 1; i <= 9; i++) {
+  const startButton = document.getElementById("startButton"+ i)
+  const preferredDisplaySurface = document.getElementById("displaySurface" + i)
 
-  // demonstrates how to detect that the user has stopped
-  // sharing the screen via the browser UI.
-  stream.getVideoTracks()[0].addEventListener('ended', () => {
-    errorMsg('The user has ended sharing the screen');
-    startButton.disabled = false;
-    preferredDisplaySurface.disabled = false;
+  startButton.addEventListener('click', () => {
+    const options = {audio: true, video: true};
+    const displaySurface = preferredDisplaySurface.options[preferredDisplaySurface.selectedIndex].value;
+    if (displaySurface !== 'default') {
+      options.video = {displaySurface};
+    }
+    navigator.mediaDevices.getDisplayMedia(options)
+        .then((stream) => {
+          startButton.disabled = true;
+          preferredDisplaySurface.disabled = true;
+          const video = document.querySelector('video');
+          video.srcObject = stream;
+        
+          // demonstrates how to detect that the user has stopped
+          // sharing the screen via the browser UI.
+          stream.getVideoTracks()[0].addEventListener('ended', () => {
+            errorMsg('The user has ended sharing the screen');
+            startButton.disabled = false;
+            preferredDisplaySurface.disabled = false;
+          });        
+        }, (error) => {
+          const msg = `getDisplayMedia error: ${error.name}`
+          const errorElement = document.querySelector('#errorMsg' + i);
+          errorElement.innerHTML += `<p>${msg}</p>`;
+          if (typeof error !== 'undefined') {
+            console.error(error);
+          }        
+        });
   });
-}
 
-function handleError(error) {
-  errorMsg(`getDisplayMedia error: ${error.name}`, error);
-}
-
-function errorMsg(msg, error) {
-  const errorElement = document.querySelector('#errorMsg');
-  errorElement.innerHTML += `<p>${msg}</p>`;
-  if (typeof error !== 'undefined') {
-    console.error(error);
+  if ((navigator.mediaDevices && 'getDisplayMedia' in navigator.mediaDevices)) {
+    startButton.disabled = false;
+  } else {
+    errorMsg('getDisplayMedia is not supported');
   }
-}
-
-
-startButton.addEventListener('click', () => {
-  const options = {audio: true, video: true};
-  const displaySurface = preferredDisplaySurface.options[preferredDisplaySurface.selectedIndex].value;
-  if (displaySurface !== 'default') {
-    options.video = {displaySurface};
-  }
-  navigator.mediaDevices.getDisplayMedia(options)
-      .then(handleSuccess, handleError);
-});
-
-if ((navigator.mediaDevices && 'getDisplayMedia' in navigator.mediaDevices)) {
-  startButton.disabled = false;
-} else {
-  errorMsg('getDisplayMedia is not supported');
+  
 }

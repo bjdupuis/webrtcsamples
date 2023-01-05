@@ -38,6 +38,8 @@ body {
   margin: 0;
   padding: 1em;
   word-break: break-word;
+  display: flex;
+  justify-content: center;
 }
 
 button {
@@ -226,8 +228,8 @@ textarea {
 
 video {
   background: #222;
-  margin: 0 0 20px 0;
-  --width: 100%;
+  margin: 0 0 0 0;
+  --width: 90%;
   width: var(--width);
   height: calc(var(--width) * 0.75);
 }
@@ -270,4 +272,18 @@ fieldset > select {
   h1 {
     font-size: 20px;
   }
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: 200px 200px 200px;
+  grid-template-columns: 300px 300px 300px;
+}
+
+.box {
+  background: #444;
+  border: 1px solid #555;
+  align-items: center;
+  justify-content: center;
+  color: #AAA;
 }
