@@ -20,6 +20,8 @@ if (adapter.browserDetails.browser === 'chrome' &&
 for (var i = 1; i <= 9; i++) {
   const startButton = document.getElementById("startButton"+ i)
   const preferredDisplaySurface = document.getElementById("displaySurface" + i)
+  const video = document.getElementById("gum-local" + i);
+  const errorElement = document.querySelector('#errorMsg' + i);
 
   startButton.addEventListener('click', () => {
     const options = {audio: true, video: true};
@@ -31,7 +33,6 @@ for (var i = 1; i <= 9; i++) {
         .then((stream) => {
           startButton.disabled = true;
           preferredDisplaySurface.disabled = true;
-          const video = document.getElementById("gum-local"+i);
           video.srcObject = stream;
         
           // demonstrates how to detect that the user has stopped
@@ -54,7 +55,6 @@ for (var i = 1; i <= 9; i++) {
   }
   
   function errorMsg(msg) {
-    const errorElement = document.querySelector('#errorMsg'+i);
     errorElement.innerHTML += `<p>${msg}</p>`;
     if (typeof error !== 'undefined') {
       console.error(error);
