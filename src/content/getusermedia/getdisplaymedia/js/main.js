@@ -43,11 +43,7 @@ for (var i = 1; i <= 9; i++) {
           });        
         }, (error) => {
           const msg = `getDisplayMedia error: ${error.name}`
-          const errorElement = document.querySelector('#errorMsg'+i);
-          errorElement.innerHTML += `<p>${msg}</p>`;
-          if (typeof error !== 'undefined') {
-            console.error(error);
-          }        
+          errorMsg(msg)
         });
   });
 
@@ -57,4 +53,11 @@ for (var i = 1; i <= 9; i++) {
     errorMsg('getDisplayMedia is not supported');
   }
   
+  function errorMsg(msg) {
+    const errorElement = document.querySelector('#errorMsg'+i);
+    errorElement.innerHTML += `<p>${msg}</p>`;
+    if (typeof error !== 'undefined') {
+      console.error(error);
+    }        
+  }
 }
