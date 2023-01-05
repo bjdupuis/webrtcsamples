@@ -10,7 +10,11 @@
 if (adapter.browserDetails.browser === 'chrome' &&
     adapter.browserDetails.version >= 107) {
   // See https://developer.chrome.com/docs/web-platform/screen-sharing-controls/
-  document.getElementById('options').style.display = 'block';
+  try {
+    document.getElementById('options').style.display = 'block';    
+  } catch (error) {
+    console.warn(`This will likely happen in CEF. ${error.name}`)
+  }
 } else if (adapter.browserDetails.browser === 'firefox') {
   // Polyfill in Firefox.
   // See https://blog.mozilla.org/webrtc/getdisplaymedia-now-available-in-adapter-js/
