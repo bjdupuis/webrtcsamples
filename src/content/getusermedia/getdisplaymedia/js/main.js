@@ -7,9 +7,6 @@
  */
 'use strict';
 
-const preferredDisplaySurface = document.getElementById('displaySurface');
-const startButton = document.getElementById('startButton');
-
 if (adapter.browserDetails.browser === 'chrome' &&
     adapter.browserDetails.version >= 107) {
   // See https://developer.chrome.com/docs/web-platform/screen-sharing-controls/
@@ -34,7 +31,7 @@ for (var i = 1; i <= 9; i++) {
         .then((stream) => {
           startButton.disabled = true;
           preferredDisplaySurface.disabled = true;
-          const video = document.querySelector('video');
+          const video = document.querySelector('video'+i);
           video.srcObject = stream;
         
           // demonstrates how to detect that the user has stopped
@@ -46,7 +43,7 @@ for (var i = 1; i <= 9; i++) {
           });        
         }, (error) => {
           const msg = `getDisplayMedia error: ${error.name}`
-          const errorElement = document.querySelector('#errorMsg' + i);
+          const errorElement = document.querySelector('#errorMsg'+i);
           errorElement.innerHTML += `<p>${msg}</p>`;
           if (typeof error !== 'undefined') {
             console.error(error);
