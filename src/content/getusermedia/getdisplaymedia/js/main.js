@@ -28,7 +28,7 @@ for (var i = 1; i <= 9; i++) {
   const errorElement = document.querySelector('#errorMsg' + i);
 
   startButton.addEventListener('click', () => {
-    const options = {audio: true, video: true};
+    const options = {audio: false, video: true};
     const displaySurface = preferredDisplaySurface.options[preferredDisplaySurface.selectedIndex].value;
     if (displaySurface !== 'default') {
       options.video = {displaySurface};
