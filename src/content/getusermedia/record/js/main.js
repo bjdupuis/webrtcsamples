@@ -129,7 +129,7 @@ function handleSuccess(stream) {
 
 async function init(constraints) {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    const stream = await navigator.mediaDevices.getDisplayMedia(constraints);
     handleSuccess(stream);
   } catch (e) {
     console.error('navigator.getUserMedia error:', e);
@@ -140,14 +140,6 @@ async function init(constraints) {
 document.querySelector('button#start').addEventListener('click', async () => {
   document.querySelector('button#start').disabled = true;
   const hasEchoCancellation = document.querySelector('#echoCancellation').checked;
-  const constraints = {
-    audio: {
-      echoCancellation: {exact: hasEchoCancellation}
-    },
-    video: {
-      width: 1280, height: 720
-    }
-  };
-  console.log('Using media constraints:', constraints);
-  await init(constraints);
+  const options = {audio: false, video: true};
+  await init(options);
 });
