@@ -140,6 +140,10 @@ async function init(constraints) {
 document.querySelector('button#start').addEventListener('click', async () => {
   document.querySelector('button#start').disabled = true;
   const hasEchoCancellation = document.querySelector('#echoCancellation').checked;
-  const options = {audio: false, video: true};
+  const options = {audio: false, video: {
+    mandatory: {
+      maxFrameRate: 3
+    }
+  }};
   await init(options);
 });
